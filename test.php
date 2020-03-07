@@ -44,8 +44,8 @@
 
 
   //GET NO.RECORD
-  $ejString_noRecord = $ej_file;
-  // echo $ejString_noRecord;
+  $ej_transaction = $ej_file;
+  // echo $ej_transaction;
 
   function get_string_between_transaction($string, $start, $end){
 	$ini = strpos($string, $start);
@@ -54,22 +54,71 @@
     $len = strpos($string, $end, $ini) - $ini;
     return substr($string, $ini, $len);
 	}
-	function get_transaction (){
-		$noRecord = (str
-		while ( $find_tr_noRecord !== false) {
-			$get_noRecord = (str_replace('.', '', get_string_between_transaction($ejString_noRecord, 'TRANSACTION start', 'TRANSACTION END')));
-			array_push($arr_noRecord, $get_noRecord);
-			// echo (str_replace('.', '', get_string_between($ejString, $start, $end)));
-			// echo "<br>";
-			$find_tr_noRecord = strpos($ejString_noRecord, 'TRANSACTION start');
-			$ejString_noRecord = substr($ejString_noRecord, $find_tr_noRecord +8);
+
+	// SEPARATING EACH TRANSACTION
+	function get_transaction ($ej_transaction){
+		$find_transaction = strpos($ej_transaction, 'TRANSACTION start');
+		$arr_transaction = [];
+		while ( $find_transaction !== false) {
+			$get_transaction = get_string_between_transaction($ej_transaction, 'TRANSACTION start', 'TRANSACTION END');
+			array_push($arr_transaction, $get_transaction);
+			$find_transaction = strpos($ej_transaction, 'TRANSACTION start');
+			$ej_transaction = substr($ej_transaction, $find_transaction +8);
 		} 
+		return $arr_transaction;
+		// 
 	}
-	$i=0;
-	while($i<20){
-	echo "$arr_noRecord[$i]". '<br> <br>';
-	$i++;
-}
+	$transaction = (get_transaction($ej_transaction));
+
+	// function find_cash_transaction(){
+	// 	$cash_transaction = [];
+	// 	$iq = 0;
+	// 	while ($transaction[$iq] !== null) {
+	// 		if(strpos($transaction[$iq], "CASH TAKEN") !== false){
+	// 				array_push($cash_transaction, $transaction[$iq]);
+	// 		}$iq++;
+	// 	}return $cash_transaction;
+	// }
+
+		$cash_transaction = [];
+		$iq = 0;
+		while ($transaction[$iq] !== null) {
+			if(strpos($transaction[$iq], "CASH TAKEN") !== false){
+					array_push($cash_transaction, $transaction[$iq]);
+			}$iq++;
+		}
+		// var_dump($cash_transaction);
+		echo $cash_transaction[0] . '<br> <br>' . $cash_transaction[1];
+
+			// print_r ($a[0]);
+			// echo $b;
+			// var_dump ($cash_transaction);
+			//echo $cash_transaction[0];
+			
+
+	// function find_cash_transaction(){
+	// 	$i= 0;
+	// 	$cash_transaction = [];
+	// 	while($transaction[$i] !== null){
+	// 		if(strpos($transaction[$i], "CASH TAKEN") !== false){
+	// 			echo "string";
+	// 			array_push($cash_transaction, $transaction[$i]);
+	// 			$i++;
+	// 		}else {
+	// 			echo "asdd";
+	// 			$i++;
+	// 		}
+	// 	}var_dump($cash_transaction);
+	// 	return $cash_transaction;
+	// } find_cash_transaction();
+	
+
+
+// 	$i=0;
+// 	while($i<20){
+// 	echo "$transaction[$i]". '<br> <br>';
+// 	$i++;
+// }
 
 
 
