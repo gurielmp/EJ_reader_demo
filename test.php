@@ -79,15 +79,18 @@
 		array_push($arr_jam, $get_jam);
 		$i++;
 	}
-$it = 0;
-	while ( $transaction[$it] !== null) {
-		echo $transaction[$it] . '<br> <br>';
-		echo $arr_nilai[$it] . '<br> <br>';
-		echo $arr_noRecord[$it] . '<br> <br>';
-		echo(rand(100000,999999)). '<br> <br>';
-		echo $arr_jam[$it]. '<br> <br>';
-		$it++;
-	}
+	$pengisian = (str_replace('.', '', get_string_between_transaction($ejString, 'AWL' , 'KEL')));
+	echo $pengisian;
+
+// $it = 0;
+// 	while ( $transaction[$it] !== null) {
+// 		echo $transaction[$it] . '<br> <br>';
+// 		echo $arr_nilai[$it] . '<br> <br>';
+// 		echo $arr_noRecord[$it] . '<br> <br>';
+// 		echo(rand(100000,999999)). '<br> <br>';
+// 		echo $arr_jam[$it]. '<br> <br>';
+// 		$it++;
+// 	}
 
 
 

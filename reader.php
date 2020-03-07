@@ -31,8 +31,6 @@
     $len = strpos($string, $end, $ini) - $ini -3;
     return substr($string, $ini, $len);
   }
-  
-
 
   //GET NO.RECORD
   $ej_transaction = $ej_file;
@@ -79,7 +77,8 @@
     array_push($arr_id, $get_id);
     $i++;
   }
-  $get_total_pengisian = 100000000 * 4;
+  $pengisian = (str_replace('.', '', get_string_between_transaction($ejString, 'AWL' , 'KEL')));
+  $get_total_pengisian = $pengisian * 4;
   $get_sisa_restocking = $get_total_pengisian - $get_total_nilai;
 
 ?>
@@ -202,7 +201,7 @@
             <form class="col-md-2" method="POST">
               <button type="submit" name="delete" class="fileUpload btn btn-primary">Reset</button>
             </form>
-            <form class="col-md-2" action="#">
+            <form class="col-md-2" action="">
               <button type="submit" class="fileUpload btn btn-primary">Download .xslx file</button>
             </form>
           </div>
