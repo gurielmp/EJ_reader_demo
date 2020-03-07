@@ -6,6 +6,11 @@
       unset($_SESSION['message']);
     }
 
+    if(isset($_POST['delete']))
+    {
+        unlink("uploaded_files/ejdemo.txt");
+    }
+
   $arr_bank = [];
   $arr_id = [];
   $arr_tanggal = [];
@@ -194,9 +199,9 @@
               </div>
               <button class="btn btn-primary" type="submit" name="uploadBtn" value="Upload">Proses file</button>
             </form>
-            <!-- <form class="col-md-2" action="#">
-              <button type="submit" class="fileUpload btn btn-primary">Reset</button>
-            </form> -->
+            <form class="col-md-2" method="POST">
+              <button type="submit" name="delete" class="fileUpload btn btn-primary">Reset</button>
+            </form>
             <form class="col-md-2" action="#">
               <button type="submit" class="fileUpload btn btn-primary">Download .xslx file</button>
             </form>
