@@ -33,7 +33,7 @@
         <div class="logo">
             <img src="assets/img/avatar.svg" width="20%" style="display: block; margin: auto;">
             <a href="#" class="simple-text">
-                 Belajar
+                 WELCOME
             </a>
         </div>
             
@@ -151,7 +151,7 @@
         <footer class="footer">
             <div class="container-fluid">
                 <p class="copyright pull-right">
-                    &copy; 2020 <a href="#">Belajar</a>
+                    &copy; 2020 <a href="#">EJ Reader</a>
                 </p>
             </div>
         </footer>

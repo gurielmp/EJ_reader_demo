@@ -1,3 +1,7 @@
+<?php  
+  require './functions.php';
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -51,55 +55,7 @@
 </head>
 
 <body>
-  <?php 
-  $arr_bank = [];
-	$arr_id = [];
-	$arr_tanggal = [];
-	$arr_jam = [];
-	$arr_noRecord = [];
-	$arr_transaksi = [];
-	$arr_nilai = [];
-  $test = "bangkeee";
   
-  $ej_file = file_get_contents('ej2.txt');
-	$ejString = (str_replace(' ', '', file_get_contents('ej2.txt')));
-
-	function get_string_between($string, $start, $end){
-		$ini = strpos($string, $start);
-    if ($ini == 0) return '';
-    $ini += strlen($start)+9;
-    $len = strpos($string, $end, $ini) - $ini;
-    return substr($string, $ini, $len);
-	}
-	$start = 'PENARIKANTABUNGAN';
-	$end = 'SALDO';
-	$raw_nilai = get_string_between($ejString, $start, $end);
-	$nilai = (str_replace('.', '', $raw_nilai));
-
-	$find_tr = strpos($ejString, $start);
-  $get_total_pengisian = 100000000 * 4;
-
-		while ( $find_tr !== false) {
-			$get_nilai = (str_replace('.', '', get_string_between($ejString, $start, $end)));
-			array_push($arr_nilai, $get_nilai);
-			$get_total_nilai += $get_nilai;
-			// echo (str_replace('.', '', get_string_between($ejString, $start, $end)));
-			// echo "<br>";
-			$find_tr = strpos($ejString, $start);
-			$ejString = substr($ejString, $find_tr +8);
-		}
-    while ( $find_tr !== false) {
-      $get_noRecord = (str_replace('.', '', get_string_between($ejString, "NO.REKORD", "PENARIKANTABUNGAN")));
-      array_push($arr_noRecord, $get_noRecord);
-      // echo (str_replace('.', '', get_string_between($ejString, $start, $end)));
-      // echo "<br>";
-      $find_tr = strpos($ejString, "NO.REKORD");
-      $ejString = substr($ejString, $find_tr +8);
-    }
-  $get_sisa_restocking = $get_total_pengisian - $get_total_nilai;
-		// print_r ($arr_nilai);
-//		echo "<h1> Rp." . $get_total_nilai . "</h1>";
-?>
 
   <div class="wrapper">
     <div class="sidebar" data-color="azure">
@@ -153,7 +109,7 @@
       <div class="content">
         <div class="row">
           <div class="container-fluid">
-            <form class="col-md-7" action="#">
+            <form class="col-md-5" action="#">
               <input id="uploadFile" placeholder="No File Selection" disabled="disabled" />
               <div class="fileUpload btn btn-primary">
                 <span>Upload</span>
@@ -161,18 +117,18 @@
               </div>
               <button class="btn btn-primary" type="submit">Proses file</button>
             </form>
-            <form class="col-md-3" action="#">
-              <button type="submit" class="btn-reader">Find Cash Clear</button>
-            </form>
+            <!-- <form class="col-md-2" action="#">
+              <button type="submit" class="fileUpload btn btn-primary">Reset</button>
+            </form> -->
             <form class="col-md-2" action="#">
-              <button type="submit" class="btn-reader">Save</button>
+              <button type="submit" class="fileUpload btn btn-primary">Download .xslx file</button>
             </form>
           </div>
         </div>
         <div class="row">
           <div class="container-fluid">
             <div class="col-md-5">
-              <div class="col-md-5 card container-fluid ex1">
+              <div class="col-md-5 card container-fluid ex1" style="width: 100%;">
                <?php echo $ej_file ?>
               </div>
             </div>
@@ -197,9 +153,9 @@
                       echo "<tr>
                       <td>".$no."</td>
                       <td>BNI</td>
-                      <td>123456</td>
-                      <td>01/01/2001</td>
-                      <td>01:00</td>
+                      <td>".$arr_id[$i]."</td>
+                      <td>23/01/20</td>
+                      <td>".$arr_jam[$i]."</td>
                       <td>".$arr_noRecord[$i]."</td>
                       <td>PENARIKAN</td>
                       <td>".$arr_nilai[$i]."</td>
@@ -224,7 +180,7 @@
                       <td>Total Penarikan : <?php echo "<span>". $get_total_nilai ."</span>" ?></td>
                     </tr>
                     <tr>
-                      <td>Sisa Restosking : <?php echo "<span>". $get_sisa_restocking ."</span>" ?></td>
+                      <td>Sisa Restocking : <?php echo "<span>". $get_sisa_restocking ."</span>" ?></td>
                     </tr>
                   </tbody>
                 </table>
@@ -244,14 +200,14 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1</td>
-                      <td>Mandiri</td>
-                      <td>123456</td>
-                      <td>01/01/2001</td>
-                      <td>01:00</td>
-                      <td>1234</td>
-                      <td>Pengisian</td>
-                      <td>1234567890</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
                     </tr>
                   </tbody>
                 </table>
