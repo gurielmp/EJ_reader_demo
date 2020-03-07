@@ -1,5 +1,82 @@
-<?php  
-  require './functions.php';
+<?php 
+
+    if (isset($_SESSION['message']) && $_SESSION['message'])
+    {
+      printf('<b>%s</b>', $_SESSION['message']);
+      unset($_SESSION['message']);
+    }
+
+  $arr_bank = [];
+  $arr_id = [];
+  $arr_tanggal = [];
+  $arr_jam = [];
+  $arr_noRecord = [];
+  $arr_transaksi = [];
+  $arr_nilai = [];
+  $arr_id = [];
+  
+  $ej_file = file_get_contents('uploaded_files/ejdemo.txt');
+  $ejString = (str_replace(' ', '', $ej_file));
+
+  function get_string_between($string, $start, $end){
+    $string = ' ' . $string;
+    $ini = strpos($string, $start);
+    if ($ini == 0) return '';
+    $ini += strlen($start);
+    $len = strpos($string, $end, $ini) - $ini -3;
+    return substr($string, $ini, $len);
+  }
+  
+
+
+  //GET NO.RECORD
+  $ej_transaction = $ej_file;
+  // echo $ej_transaction;
+
+  function get_string_between_transaction($string, $start, $end){
+  $ini = strpos($string, $start);
+    if ($ini == 0) return '';
+    $ini += strlen($start);
+    $len = strpos($string, $end, $ini) - $ini;
+    return substr($string, $ini, $len);
+  }
+
+  // SEPARATING EACH TRANSACTION
+  function get_transaction ($ej_transaction){
+    $find_transaction = strpos($ej_transaction, 'CASH REQUEST: ');
+    $arr_transaction = [];
+    while ( $find_transaction !== false) {
+      $get_transaction = get_string_between_transaction($ej_transaction, 'CASH REQUEST: ', 'CASH TAKEN');
+      array_push($arr_transaction, $get_transaction);
+      $find_transaction = strpos($ej_transaction, 'CASH REQUEST: ');
+      $ej_transaction = substr($ej_transaction, $find_transaction +1);
+    } 
+    return $arr_transaction;
+    // 
+  }
+  $transaction = (get_transaction($ej_transaction));
+
+//=======================================================
+
+  $i = 0;
+  while($transaction[$i] !== null){
+    $ns_transaction = (str_replace(' ', '', $transaction[$i]));
+    $get_nilai = get_string_between_transaction($ns_transaction, 'JUMLAHRP' , 'SALDO');
+    $get_noRecord = get_string_between_transaction($ns_transaction, 'NO.REKORD' , 'PENARIKAN');
+    $get_tanggal = get_string_between($ns_transaction, 'PRESENTED' , 'S1BTEB12KK');
+    $get_jam = substr($transaction[$i],8,9);
+    $get_id = rand(100000,999999);
+    $get_total_nilai += (str_replace('.', '', $get_nilai));
+    array_push($arr_nilai, (str_replace('.', '', $get_nilai)));
+    array_push($arr_noRecord, $get_noRecord);
+    array_push($arr_tanggal, $get_tanggal);
+    array_push($arr_jam, $get_jam);
+    array_push($arr_id, $get_id);
+    $i++;
+  }
+  $get_total_pengisian = 100000000 * 4;
+  $get_sisa_restocking = $get_total_pengisian - $get_total_nilai;
+
 ?>
 
 <!doctype html>
@@ -88,7 +165,7 @@
       <nav class="navbar navbar-default navbar-fixed">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">EJ Reader</a>
+            <a class="navbar-brand" href="#">EJ READER</a>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -109,13 +186,13 @@
       <div class="content">
         <div class="row">
           <div class="container-fluid">
-            <form class="col-md-5" action="#">
+            <form class="col-md-5" method="POST" action="upload.php" enctype="multipart/form-data">
               <input id="uploadFile" placeholder="No File Selection" disabled="disabled" />
               <div class="fileUpload btn btn-primary">
-                <span>Upload</span>
-                <input id="uploadBtn" type="file" class="upload" />
+                <span>Open</span>
+                <input id="uploadBtn" type="file" name="uploadedFile"  class="upload" />
               </div>
-              <button class="btn btn-primary" type="submit">Proses file</button>
+              <button class="btn btn-primary" type="submit" name="uploadBtn" value="Upload">Proses file</button>
             </form>
             <!-- <form class="col-md-2" action="#">
               <button type="submit" class="fileUpload btn btn-primary">Reset</button>
