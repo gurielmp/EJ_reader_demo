@@ -201,7 +201,7 @@
             <form class="col-md-2" method="POST">
               <button type="submit" name="delete" class="fileUpload btn btn-primary">Reset</button>
             </form>
-            <form class="col-md-2" action="">
+            <form class="col-md-2" action="excel.php">
               <button type="submit" class="fileUpload btn btn-primary">Download .xslx file</button>
             </form>
           </div>
