@@ -49,7 +49,7 @@
     $find_transaction = strpos($ej_transaction, 'CASH REQUEST: ');
     $arr_transaction = [];
     while ( $find_transaction !== false) {
-      $get_transaction = get_string_between_transaction($ej_transaction, 'CASH REQUEST: ', 'CASH TAKEN');
+      $get_transaction = get_string_between_transaction($ej_transaction, 'CASH REQUEST: ', 'TRANSACTION END');
       array_push($arr_transaction, $get_transaction);
       $find_transaction = strpos($ej_transaction, 'CASH REQUEST: ');
       $ej_transaction = substr($ej_transaction, $find_transaction +1);
@@ -65,6 +65,9 @@
   while($transaction[$i] !== null){
     $ns_transaction = (str_replace(' ', '', $transaction[$i]));
     $get_nilai = get_string_between_transaction($ns_transaction, 'JUMLAHRP' , 'SALDO');
+    if($get_nilai == null){
+      $get_nilai = get_string_between_transaction($ns_transaction, 'AMOUNTRP' , 'BALANCE');
+    };
     $get_noRecord = get_string_between_transaction($ns_transaction, 'NO.REKORD' , 'PENARIKAN');
     $get_tanggal = get_string_between($ns_transaction, 'PRESENTED' , 'S1BTEB12KK');
     $get_jam = substr($transaction[$i],8,9);
@@ -78,7 +81,7 @@
     $i++;
   }
   $pengisian = (str_replace('.', '', get_string_between_transaction($ejString, 'AWL' , 'KEL')));
-  $get_total_pengisian = $pengisian * 4;
+  $get_total_pengisian = $pengisian * 3;
   $get_sisa_restocking = $get_total_pengisian - $get_total_nilai;
 
 ?>
@@ -161,6 +164,12 @@
               <p>EJ Reader</p>
             </a>
           </li>
+          <li>
+            <a href="monitoring.php">
+              <i class="pe-7s-monitor"></i>
+              <p>EJ Monitoring</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -230,7 +239,7 @@
                    <?php 
                     $i = 0;
                     $no = 1;
-                    while($arr_nilai[$i] !== null){
+                    while($arr_nilai[$no] !== null){
                       echo "<tr>
                       <td>".$no."</td>
                       <td>BNI</td>

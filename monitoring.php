@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>EJ List</title>
+	<title>Monitoring</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -38,7 +38,7 @@
         </div>
             
         <ul class="nav">
-            <li class="active">
+            <li>
                 <a href="list.php">
                 <i class="pe-7s-note2"></i>
                 <p>EJ List</p>
@@ -50,7 +50,7 @@
                 <p>EJ Reader</p>
                 </a>
             </li>
-            <li>
+            <li class="active">
             <a href="monitoring.php">
               <i class="pe-7s-monitor"></i>
               <p>EJ Monitoring</p>
@@ -64,7 +64,7 @@
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">EJ List</a>
+                    <a class="navbar-brand" href="">EJ Monitoring</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -90,38 +90,46 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">EJ List - Bank</h4>
+                                <h4 class="title">Electronic Journal Monitoring</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>NO</th>
-                                    	<th>BANK</th>
-                                    	<th>TANGGAL</th>
-                                    	<th>PERIODE</th>
-                                    	<th>EJ FILE</th>
+                                        <th>ATM ID</th>
+                                        <th>LOKASI</th>
+                                        <th>TXN (ADMIN)</th>
+                                    	<th>SISA (ADMIN)</th>
+                                    	<th>SISA (BILL COUNT)</th>
+                                    	<th>SISA FISIK</th>
+                                        <th>SELISIH (ADMIN)</th>
+                                    	<th>SELISIH (BILL COUNT)</th>
+                                        <th>SELISIH ADMIN VS FISIK</th>
                                     </thead>
                                     <tbody>
                                         <tr>
                                         	<td>1</td>
-                                        	<td>BNI</td>
-                                        	<td>12/04/2020</td>
-                                        	<td>4</td>
-                                        	<td>EJ_DEMO.txt</td>
+                                        	<td>S1AMGDA008</td>
+                                        	<td>DEPOK TWON SQUARE</td>
+                                        	<td>381.500.000</td>
+                                        	<td>118.500.000</td>
+                                            <td>118.500.000</td>
+                                            <td>118.500.000</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>NIHIL</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>BNI</td>
-                                            <td>12/04/2020</td>
-                                            <td>5</td>
-                                            <td>EJ_DEMO.txt</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>BNI</td>
-                                            <td>12/04/2020</td>
-                                            <td>6</td>
-                                            <td>EJ_DEMO.txt</td>
+                                            <td>S1GUID10SX</td>
+                                            <td>FAK.MIPA UI DEPOK</td>
+                                            <td>228.550.000</td>
+                                            <td>71.450.000</td>
+                                            <td>71.450.000</td>
+                                            <td>72.700.000</td>
+                                            <td>1.250.000</td>
+                                            <td>1.250.000</td>
+                                            <td>LEBIH</td>
                                         </tr>
                                     </tbody>
                                 </table>

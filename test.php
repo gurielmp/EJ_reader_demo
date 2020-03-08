@@ -6,7 +6,6 @@
 	$arr_noRecord = [];
 	$arr_transaksi = [];
 	$arr_nilai = [];
-  $test = "bangkeee";
   
   $ej_file = file_get_contents('ej2.txt');
 	$ejString = (str_replace(' ', '', $ej_file));
@@ -71,7 +70,7 @@
 	$i = 0;
 	while($transaction[$i] !== null){
 		$ns_transaction = (str_replace(' ', '', $transaction[$i]));
-		$get_nilai = get_string_between_transaction($ns_transaction, 'JUMLAHRP' , 'SALDO');
+		$get_nilai = get_string_between_transaction($ns_transaction, 'AMOUNTRP' , 'BALANCE');
 		$get_noRecord = get_string_between_transaction($ns_transaction, 'NO.REKORD' , 'PENARIKAN');
 		$get_jam = substr($transaction[$i],8,9);
 		array_push($arr_nilai, (str_replace('.', '', $get_nilai)));
@@ -80,7 +79,12 @@
 		$i++;
 	}
 	$pengisian = (str_replace('.', '', get_string_between_transaction($ejString, 'AWL' , 'KEL')));
-	echo $pengisian;
+	// echo $pengisian;
+
+	var_dump ($arr_nilai[2]);
+	if($arr_nilai[2] == null){
+		echo "kosong beroh";
+	}
 
 // $it = 0;
 // 	while ( $transaction[$it] !== null) {
@@ -92,7 +96,8 @@
 // 		$it++;
 // 	}
 
-
+get_string_between($ns_transaction, 'PRESENTED' , 'NO.REKORD');
+get_string_between_transaction($ns_transaction, 'AMOUNTRP' , 'BALANCE');
 
 //=========================================
 	// function find_cash_transaction(){
