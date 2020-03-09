@@ -28,7 +28,7 @@
     $ini = strpos($string, $start);
     if ($ini == 0) return '';
     $ini += strlen($start);
-    $len = strpos($string, $end, $ini) - $ini -3;
+    $len = strpos($string, $end, $ini) - $ini -5;
     return substr($string, $ini, $len);
   }
 
@@ -75,13 +75,15 @@
     $get_total_nilai += (str_replace('.', '', $get_nilai));
     array_push($arr_nilai, (str_replace('.', '', $get_nilai)));
     array_push($arr_noRecord, $get_noRecord);
-    array_push($arr_tanggal, $get_tanggal);
+    if(strlen($get_tanggal) === 9){
+      array_push($arr_tanggal, $get_tanggal);
+    }else{
+    array_push($arr_tanggal, '23/01/20');
+  }
     array_push($arr_jam, $get_jam);
     array_push($arr_id, $get_id);
     $i++;
   }
-  // $pengisian = (str_replace('.', '', get_string_between_transaction($ejString, 'AWL' , 'KEL')));
-  // $get_total_pengisian = $pengisian * 4;
   
 $tr_pengisian = get_string_between_transaction($ejString, 'S1BTEB12KK' , 'S1BTEB12KK');
 $find_pengisian = strpos($tr_pengisian, 'AWL');
@@ -100,6 +102,8 @@ while($arr_pengisian[$ip] !== null){
 
 $sisa_restocking = $total_pengisian - $get_total_nilai;
 ?>
+
+
 
 <!doctype html>
 <html lang="en">
@@ -258,8 +262,8 @@ $sisa_restocking = $total_pengisian - $get_total_nilai;
                       echo "<tr>
                       <td>".$no."</td>
                       <td>BNI</td>
-                      <td>".$arr_id[$i]."</td>
-                      <td>23/01/20</td>
+                      <td>S1BTEB12KK</td>
+                      <td>".$arr_tanggal[$i]."</td>
                       <td>".$arr_jam[$i]."</td>
                       <td>".$arr_noRecord[$i]."</td>
                       <td>PENARIKAN</td>

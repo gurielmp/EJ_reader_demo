@@ -79,7 +79,9 @@
 		$i++;
 	}
 	$pengisian = (str_replace('.', '', get_string_between_transaction($ejString, 'AWL' , 'KEL')));
-	// echo $pengisian;
+	echo $transaction[2]. '<br> <br>';
+	echo $transaction[3]. '<br> <br>';
+	echo $transaction[4];;
 
 	// var_dump ($arr_nilai[2]);
 	// if($arr_nilai[2] == null){
@@ -106,14 +108,16 @@ while ( $find_pengisian !== false) {
 	array_push($arr_pengisian, $get_pengisian);
 	$find_pengisian = strpos($tr_pengisian, 'AWL');
 	$tr_pengisian = substr($tr_pengisian, $find_pengisian +1);
-} var_dump($arr_pengisian);
+} 
+// var_dump($arr_pengisian);
 
 
 $ip = 0;
 while($arr_pengisian[$ip] !== null){
 	$total_pengisian += str_replace('.', '', $arr_pengisian[$ip]); 
 	$ip++;
-}echo $total_pengisian;
+}
+// echo $total_pengisian;
 
 //=========================================
 	// function find_cash_transaction(){
