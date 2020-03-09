@@ -81,10 +81,10 @@
 	$pengisian = (str_replace('.', '', get_string_between_transaction($ejString, 'AWL' , 'KEL')));
 	// echo $pengisian;
 
-	var_dump ($arr_nilai[2]);
-	if($arr_nilai[2] == null){
-		echo "kosong beroh";
-	}
+	// var_dump ($arr_nilai[2]);
+	// if($arr_nilai[2] == null){
+	// 	echo "kosong beroh";
+	// }
 
 // $it = 0;
 // 	while ( $transaction[$it] !== null) {
@@ -96,8 +96,24 @@
 // 		$it++;
 // 	}
 
-get_string_between($ns_transaction, 'PRESENTED' , 'NO.REKORD');
-get_string_between_transaction($ns_transaction, 'AMOUNTRP' , 'BALANCE');
+$tr_pengisian = get_string_between_transaction($ejString, 'S1BTEB12KK' , 'S1BTEB12KK');
+$pengisian = (str_replace(' ', '', get_string_between_transaction($tr_pengisian, 'AWL' , 'KEL')));
+
+$find_pengisian = strpos($tr_pengisian, 'AWL');
+$arr_pengisian = [];
+while ( $find_pengisian !== false) {
+	$get_pengisian = get_string_between_transaction($tr_pengisian, 'AWL', 'KEL');
+	array_push($arr_pengisian, $get_pengisian);
+	$find_pengisian = strpos($tr_pengisian, 'AWL');
+	$tr_pengisian = substr($tr_pengisian, $find_pengisian +1);
+} var_dump($arr_pengisian);
+
+
+$ip = 0;
+while($arr_pengisian[$ip] !== null){
+	$total_pengisian += str_replace('.', '', $arr_pengisian[$ip]); 
+	$ip++;
+}echo $total_pengisian;
 
 //=========================================
 	// function find_cash_transaction(){

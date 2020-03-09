@@ -80,10 +80,25 @@
     array_push($arr_id, $get_id);
     $i++;
   }
-  $pengisian = (str_replace('.', '', get_string_between_transaction($ejString, 'AWL' , 'KEL')));
-  $get_total_pengisian = $pengisian * 3;
-  $get_sisa_restocking = $get_total_pengisian - $get_total_nilai;
+  // $pengisian = (str_replace('.', '', get_string_between_transaction($ejString, 'AWL' , 'KEL')));
+  // $get_total_pengisian = $pengisian * 4;
+  
+$tr_pengisian = get_string_between_transaction($ejString, 'S1BTEB12KK' , 'S1BTEB12KK');
+$find_pengisian = strpos($tr_pengisian, 'AWL');
+$arr_pengisian = [];
+while ( $find_pengisian !== false) {
+  $get_pengisian = get_string_between_transaction($tr_pengisian, 'AWL', 'KEL');
+  array_push($arr_pengisian, $get_pengisian);
+  $find_pengisian = strpos($tr_pengisian, 'AWL');
+  $tr_pengisian = substr($tr_pengisian, $find_pengisian +1);
+ }
+$ip = 0;
+while($arr_pengisian[$ip] !== null){
+  $total_pengisian += str_replace('.', '', $arr_pengisian[$ip]); 
+  $ip++;
+}
 
+$sisa_restocking = $total_pengisian - $get_total_nilai;
 ?>
 
 <!doctype html>
@@ -264,13 +279,13 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Total Pengisian : <?php echo "<span>". $get_total_pengisian ."</span>" ?></td>
+                      <td>Total Pengisian : <?php echo "<span>". $total_pengisian ."</span>" ?></td>
                     </tr>
                     <tr>
                       <td>Total Penarikan : <?php echo "<span>". $get_total_nilai ."</span>" ?></td>
                     </tr>
                     <tr>
-                      <td>Sisa Restocking : <?php echo "<span>". $get_sisa_restocking ."</span>" ?></td>
+                      <td>Sisa Restocking : <?php echo "<span>". $sisa_restocking ."</span>" ?></td>
                     </tr>
                   </tbody>
                 </table>
